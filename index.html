@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHub Profile & Contributions Viewer</title>
+  <meta name="description" content="Enter a GitHub username to view profile details and contribution graph." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <header class="container header">
+    <h1>GitHub Profile Viewer</h1>
+    <p class="subtitle">Type a GitHub username to see their profile and contribution graph.</p>
+  </header>
+
+  <main class="container">
+    <form id="lookup-form" class="card search">
+      <label for="username" class="sr-only">GitHub username</label>
+      <div class="input-wrap">
+        <span class="at">@</span>
+        <input id="username" name="username" type="text" placeholder="octocat" autocomplete="off" required />
+      </div>
+      <button id="submit-btn" type="submit">View</button>
+    </form>
+
+    <section id="results" class="results hidden">
+      <article class="card profile" id="profile-card">
+        <div class="avatar-wrap">
+          <img id="avatar" alt="User avatar" />
+        </div>
+        <div class="profile-meta">
+          <h2 id="name">—</h2>
+          <a id="login" href="#" target="_blank" rel="noopener noreferrer">—</a>
+          <p id="bio" class="muted">—</p>
+          <div class="stats">
+            <span id="followers">0 followers</span>
+            <span id="following">0 following</span>
+            <span id="repos">0 public repos</span>
+          </div>
+          <div class="links">
+            <span id="company" class="muted"></span>
+            <a id="blog" class="muted" target="_blank" rel="noopener noreferrer"></a>
+            <span id="location" class="muted"></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card graph" id="graph-card">
+        <div class="graph-head">
+          <h3>Contribution Graph</h3>
+          <div id="year-note" class="muted">Past year</div>
+        </div>
+        <div class="graph-wrap">
+          <img id="contrib-graph" alt="GitHub contributions graph" />
+        </div>
+        <div id="graph-fallback" class="muted hidden">Could not load the contributions graph.</div>
+      </article>
+    </section>
+
+    <section id="empty-state" class="empty container">
+      <div class="card empty-card">
+        <p>Try searching for <button class="chip" data-username="octocat">octocat</button>, <button class="chip" data-username="torvalds">torvalds</button>, or <button class="chip" data-username="gaearon">gaearon</button>.</p>
+      </div>
+    </section>
+
+    <section id="error-state" class="container hidden">
+      <div class="card error">
+        <strong>Error:</strong>
+        <span id="error-msg">User not found.</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p class="muted">Made with ❤️. Data from GitHub public API. Contributions graph by ghchart.rshah.org.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
