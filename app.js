@@ -22,6 +22,12 @@ const locationEl = document.getElementById('location');
 const graphImg = document.getElementById('contrib-graph');
 const graphFallback = document.getElementById('graph-fallback');
 
+// Resume elements
+const resumeInput = document.getElementById('resume-input');
+const resumeViewer = document.getElementById('resume-viewer');
+const resumeDownload = document.getElementById('resume-download');
+let resumeUrl = null;
+
 // Helpers
 function setLoading(isLoading){
   const btn = document.getElementById('submit-btn');
@@ -44,6 +50,16 @@ function clearError(){ errorState.classList.add('hidden'); }
 function showResults(){
   results.classList.remove('hidden');
   emptyState.classList.add('hidden');
+}
+
+function clearResume(){
+  if(resumeUrl){ URL.revokeObjectURL(resumeUrl); resumeUrl = null; }
+  if(resumeViewer){ resumeViewer.innerHTML = '<div class="muted">No resume uploaded.</div>'; }
+  if(resumeDownload){
+    resumeDownload.classList.add('hidden');
+    resumeDownload.removeAttribute('href');
+    resumeDownload.removeAttribute('download');
+  }
 }
 
 function resetProfile(){
@@ -133,3 +149,35 @@ document.querySelectorAll('.chip').forEach(chip => {
     form.requestSubmit();
   });
 });
+
+if(resumeInput){
+  resumeInput.addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if(!file){ clearResume(); return; }
+    if(file.type !== 'application/pdf'){
+      clearResume();
+      showError('Please select a PDF file');
+      return;
+    }
+    clearError();
+    if(resumeUrl){ URL.revokeObjectURL(resumeUrl); }
+    resumeUrl = URL.createObjectURL(file);
+    if(resumeViewer){
+      resumeViewer.innerHTML = '';
+      const embed = document.createElement('embed');
+      embed.type = 'application/pdf';
+      embed.src = resumeUrl;
+      embed.className = 'pdf-embed';
+      embed.setAttribute('aria-label', 'Resume PDF');
+      resumeViewer.appendChild(embed);
+    }
+    if(resumeDownload){
+      resumeDownload.href = resumeUrl;
+      resumeDownload.download = file.name || 'resume.pdf';
+      resumeDownload.classList.remove('hidden');
+    }
+    showResults();
+  });
+}
+
+window.addEventListener('beforeunload', () => { if(resumeUrl){ URL.revokeObjectURL(resumeUrl); } });
