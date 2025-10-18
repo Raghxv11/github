@@ -59,6 +59,18 @@
         </div>
         <div id="graph-fallback" class="muted hidden">Could not load the contributions graph.</div>
       </article>
+
+      <article class="card resume" id="resume-card">
+        <div class="resume-head">
+          <h3>Resume</h3>
+          <label for="resume-input" class="file-btn">Upload PDF</label>
+          <input id="resume-input" type="file" accept="application/pdf" class="sr-only" />
+        </div>
+        <div class="resume-viewer" id="resume-viewer">
+          <div class="muted">No resume uploaded.</div>
+        </div>
+        <a id="resume-download" class="muted hidden" download>Download resume</a>
+      </article>
     </section>
 
     <section id="empty-state" class="empty container">
@@ -75,9 +87,6 @@
     </section>
   </main>
 
-  <footer class="container footer">
-    <p class="muted">Made with ❤️. Data from GitHub public API. Contributions graph by ghchart.rshah.org.</p>
-  </footer>
 
   <script src="app.js"></script>
 </body>

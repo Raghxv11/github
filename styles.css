@@ -75,6 +75,17 @@ body{
 .graph-wrap{ width:100%; overflow-x:auto; border-radius: 12px; border: 1px dashed var(--card-border); background: rgba(255,255,255,0.03); }
 .graph-wrap img{ display:block; width: 100%; height:auto; min-width: 680px; }
 
+.resume{ padding: 18px; }
+.resume-head{ display:flex; align-items:center; gap: 12px; justify-content: space-between; margin-bottom: 10px; }
+.file-btn{
+  display:inline-block; padding: 8px 12px; border-radius: 10px; cursor: pointer;
+  color: #0a0f1f; background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  font-weight: 700; border: 1px solid transparent; text-decoration: none;
+}
+.resume-viewer{ width:100%; border-radius: 12px; border: 1px dashed var(--card-border); background: rgba(255,255,255,0.03); overflow:hidden; }
+.resume-viewer .pdf-embed{ display:block; width:100%; height: min(80vh, 720px); }
+.resume a{ display:inline-block; margin-top: 10px; }
+
 .empty{ margin-top: 8px; }
 .empty-card{ padding: 16px; text-align:center; }
 .chip{ background: rgba(255,255,255,0.08); color: var(--text); border:1px solid var(--card-border); border-radius: 999px; padding: 6px 10px; cursor: pointer; }
